@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Task1</title>
+</head>
+<body>
+<script>
+  'use strict';
+  var userText = prompt('Введите любую строку', '');
+
+  function countOfVowels(text) {
+    var str = text.toLowerCase().split('');
+    var vowels = ['а', 'я', 'у', 'ю', 'о', 'ё', 'е', 'э', 'и', 'ы'];
+    var count = 0;
+    str.filter(function (compareLetter) {
+      for (var i = 0; i < vowels.length; i++) {
+        if (compareLetter === vowels[i]) {
+          count++;
+        }
+      }
+    });
+    return count ? count : 'Гласных в предложении нет';
+  }
+
+  console.log('Количество гласных в вашем предложении: ' + countOfVowels(userText));
+</script>
+</body>
+</html>
