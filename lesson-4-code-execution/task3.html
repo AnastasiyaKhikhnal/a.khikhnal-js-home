@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Task3</title>
+</head>
+<body>
+<script>
+  'use strict';
+  var numbers = [];
+
+  while (true) {
+    var input = prompt('Введите число', 0);
+    if (input === '' || input === null || isNaN(input)) break;
+    numbers.push(+input);
+  }
+
+  var countSum = 0;
+  for (var i = 0; i < numbers.length; i++) {
+    countSum += numbers[i];
+  }
+  alert('Сумма введеных вами чисел равна: ' + countSum);
+</script>
+</body>
+</html>
