@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Task2</title>
+</head>
+<body>
+<script>
+  'use strict';
+
+  var firstName = getFirstName();
+
+  function getFirstName() {
+    var x;
+    do {
+      var name = prompt('Введите Ваше имя:', '');
+      x = name.trim();
+    } while (!isNaN(x));
+    return x;
+  }
+
+  var secondName = getSecondName();
+
+  function getSecondName() {
+    var x;
+    do {
+      var name = prompt('Введите Ваше отчество:', '');
+      x = name.trim();
+    } while (!isNaN(x));
+    return x;
+  }
+
+  var lastName = getlastName();
+
+  function getlastName() {
+    var x;
+    do {
+      var name = prompt('Введите Вашу фамилию:', '');
+      x = name.trim();
+    } while (!isNaN(x));
+    return x;
+  }
+
+  var fullYears = getFullYears();
+
+  function getFullYears() {
+    var n;
+    do {
+      var number = prompt('Сколько Вам лет?', '');
+      n = parseInt(number, 10);
+    } while (n < 1 || isNaN(n));
+    return n;
+  }
+
+  var gender = confirm('Ваш пол - мужской?');
+  var daysInYear = 365;
+  var pension = false;
+
+  if (gender && (fullYears >= 63)) {
+    pension = true;
+  } else if (!gender && (fullYears >= 58)) {
+    pension = true;
+  }
+
+  var fullName = firstName + ' ' + secondName + ' ' + lastName;
+  var ageInDays = fullYears * daysInYear;
+  var futureYears = fullYears + 5;
+
+  gender = (gender) ? 'мужской' : 'женский';
+  pension = (pension) ? 'да' : 'нет';
+
+  alert('Ваше ФИО: ' + fullName + '\n' +
+    'Ваш возраст в годах: ' + fullYears + '\n' +
+    'Ваш возраст в днях: ' + ageInDays + '\n' +
+    'через 5 лет Вам будет: ' + futureYears + '\n' +
+    'Ваш пол: ' + gender + '\n' +
+    'Вы на пенсии: ' + pension);
+</script>
+</body>
+</html>
