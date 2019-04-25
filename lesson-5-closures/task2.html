@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task2</title>
+</head>
+<body>
+<script>
+  'use strict';
+  var object = {
+    className: 'menu open menu menu close close my'
+  };
+
+  function removeClass(obj, cls) {
+    var arr = obj.className.split(' ');
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === cls) {
+        arr.splice(i, 1);
+        i--; // уменьшаем индекс для проверки элемента, который сдвинулся на место удаленного элемента.
+      }
+    }
+    obj.className = arr.join(' ');
+  }
+
+  removeClass(object, 'menu');
+  removeClass(object, 'close');
+  removeClass(object, 'header');
+  alert(object.className);
+</script>
+</body>
+</html>
