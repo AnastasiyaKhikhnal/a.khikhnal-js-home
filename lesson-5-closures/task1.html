@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task1</title>
+</head>
+<body>
+<script>
+  'use strict';
+  var row = parseInt(prompt('Введите количество строк'));
+  var col = parseInt(prompt('Введите количество столбцов'));
+
+  function getChessBoard(a, b) {
+    var string = '';
+    for (var i = 0; i < a; i++) {
+      for (var j = 0; j < b; j++) {
+        ((i + j) % 2 === 0) ? string += '#' : string += ' ';
+      }
+      string += '\n';
+    }
+    return string;
+  }
+
+  alert(getChessBoard(row, col));
+</script>
+</body>
+</html>
