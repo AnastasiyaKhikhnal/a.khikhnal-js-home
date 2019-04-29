@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge5</title>
+</head>
+<body>
+<script>
+  'use strict';
+  var john = {
+    name: 'John',
+    bills: [124, 48, 268, 180, 42],
+    calcTips: function () {
+      this.tips = [];
+      this.totalSum = [];
+
+      for (var i = 0; i < this.bills.length; i++) {
+        var percent;
+        var bill = this.bills[i];
+
+        if (bill < 50) {
+          percent = 0.2;
+        } else if (50 <= bill < 200) {
+          percent = 0.15;
+        } else {
+          percent = 0.1;
+        }
+        this.tips[i] = Math.round(bill * percent);
+        this.totalSum[i] = Math.round(bill + bill * percent);
+      }
+    }
+  };
+
+  var mark = {
+    name: 'Mark',
+    bills: [77, 375, 110, 45],
+    calcTips: function () {
+      this.tips = [];
+      this.totalSum = [];
+
+      for (var i = 0; i < this.bills.length; i++) {
+        var percent;
+        var bill = this.bills[i];
+
+        if (bill < 100) {
+          percent = 0.2;
+        } else if (bill >= 100 && bill < 300) {
+          percent = 0.1;
+        } else {
+          percent = 0.25;
+        }
+        this.tips[i] = Math.round(bill * percent);
+        this.totalSum[i] = Math.round(bill + bill * percent);
+      }
+    }
+  };
+
+  function calcAverage(tips) {
+    var sum = 0;
+    for (var i = 0; i < tips.length; i++) {
+      sum = sum + tips[i];
+    }
+    return Math.round(sum / tips.length);
+  }
+
+  john.calcTips();
+  mark.calcTips();
+
+  john.average = calcAverage(john.tips);
+  mark.average = calcAverage(mark.tips);
+  console.log(john, mark);
+
+  if (john.average > mark.average) {
+    console.log(john.name + ' paid the highest tips on average: ' + john.average + '$');
+  } else if (mark.average > john.average) {
+    console.log(mark.name + ' paid the highest tips on average: ' + mark.average + '$');
+  }
+</script>
+</body>
+</html>
