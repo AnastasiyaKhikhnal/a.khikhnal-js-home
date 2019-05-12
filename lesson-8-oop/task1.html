@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task1</title>
+</head>
+<body>
+<script>
+  'use strict';
+  (function () {
+    function Question(question, answers, correctAns) {
+      this.question = question;
+      this.answers = answers;
+      this.correctAns = correctAns;
+    }
+
+    Question.prototype.ShowQuestion = function () {
+      console.log('Проверьте свою эрудицию:' + '\n' + this.question + '\n' + this.answers);
+    };
+
+    Question.prototype.checkUserAnswer = function (ans) {
+      if (this.correctAns === ans) {
+        console.log('Отлично! Правильный ответ.');
+      } else console.log('Неправильный ответ.');
+    };
+
+    var quest1 = new Question('Родина картофеля? ', [' 1.Беларусь', ' 2.Южная Америка', ' 3.Азия'], 2);
+    var quest2 = new Question(' Какой город старше – Москва или Минск? ', [' 1.Минск', ' 2.Москва'], 1);
+    var quest3 = new Question('«Буэнос диас» переводится как «Доброе утро». С какого языка? ', [' 1.Итальянский', ' 2.Португальский', ' 3.Испанский'], 2);
+
+    var arrQuest = [quest1, quest2, quest3];
+    var randomQuestion = Math.floor(Math.random() * arrQuest.length);
+
+    arrQuest[randomQuestion].ShowQuestion();
+
+    var UserAns = parseInt(prompt('Номер Вашего варианта ответа'));
+
+    arrQuest[randomQuestion].checkUserAnswer(UserAns);
+  })();
+</script>
+</body>
+</html>
