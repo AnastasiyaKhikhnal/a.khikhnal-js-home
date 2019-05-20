@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>DrinkStorage</title>
+  <link rel="stylesheet" href="drinkstorage.css">
+  <script src="storage.js"></script>
+</head>
+<body>
+
+<button class="btn-add">Ввод информации о напитке</button>
+<button class="btn-get">Получение информации о напитке</button>
+<button class="btn-delete">Удаление информации о напитке</button>
+<button class="btn-list">Перечень всех напитков</button>
+<label>
+  <textarea class="info"></textarea>
+</label>
+
+<script>
+  'use strict';
+  var DrinkStorage = new THashStorage();
+
+  document.querySelector('.btn-add').addEventListener('click', function () {
+    var name = prompt('Введите название напитка', 'Кола');
+    var typeOfDrink = prompt('Этот напиток алкогольный?', 'Нет');
+    var recipe = prompt('Введите рецепт напитка', ' ');
+
+    DrinkStorage.addValue(name, {
+      name: 'название напитка: ' + name + '\n',
+      typeOfDrink: 'алкогольный: ' + typeOfDrink + '\n',
+      recipe: 'рецепт: ' + recipe
+    });
+  });
+
+  document.querySelector('.btn-get').addEventListener('click', function () {
+    var name = prompt('Введите название напитка', 'Кола');
+    var q = DrinkStorage.getValue(name);
+    document.querySelector('.info').innerHTML = Object.values(q).join('');
+  });
+
+  document.querySelector('.btn-delete').addEventListener('click', function () {
+    var name = prompt('Введите название напитка', 'Кола');
+
+    if (DrinkStorage.deleteValue(name) === true) {
+      document.querySelector('.info').innerHTML = 'Напиток удален';
+    }  else document.querySelector('.info').innerHTML = 'Такого напитка нет в базе данных';
+  });
+
+  document.querySelector('.btn-list').addEventListener('click', function () {
+    document.querySelector('.info').innerHTML = DrinkStorage.getKeys().toString();
+  });
+</script>
+</body>
+</html>
