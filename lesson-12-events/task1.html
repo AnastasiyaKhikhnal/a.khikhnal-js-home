@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task1</title>
+</head>
+<body>
+
+<div id="div">
+  <img src='racoon-3.jpg' width="200" height="250">
+  <img src='racoon-2.jpg' width="200" height="250">
+  <img src='racoon-3.jpg' width="200" height="250">
+</div>
+
+<script>
+  'use strict';
+
+  var images = document.getElementsByTagName('img');
+
+  for (var i = 0; i < images.length; i++) {
+    images[i].style.left = images[i].offsetLeft + 'px';
+    images[i].style.top = images[i].offsetTop + 'px';
+  }
+
+  for (i = 0; i < images.length; i++) {
+    images[i].style.position = 'absolute';
+    images[i].addEventListener('mousedown', Drag_Start, false);
+  }
+
+  var DragImage = null; // какая карттинка сейчас перетаскивается
+  var DragShiftX;
+  var DragShiftY;
+
+  function Drag_Start(EO) {
+
+    EO = EO || window.event;
+    DragImage = EO.target;
+
+    DragShiftX = EO.pageX - self.DragImage.offsetTop;
+    DragShiftY = EO.pageY - self.DragImage.offsetLeft;
+  }
+
+  document.addEventListener('mousemove', Drag_Move, false);
+
+  function Drag_Move(EO) {
+    EO = EO || window.event;
+    DragImage = EO.target;
+
+    DragImage.style.zIndex = 10;
+
+    DragImage.style.left = EO.pageX - DragShiftX + 'px';
+    DragImage.style.top = EO.pageY - DragShiftY + 'px';
+  }
+
+  document.addEventListener('mouseup', Drag_Stop, false);
+
+  function Drag_Stop(EO) {
+    DragImage = null;
+    var DragShiftX = null;
+    var DragShiftY = null;
+    document.removeEventListener('mousemove', Drag_Move, false);
+  }
+</script>
+</body>
+</html>
