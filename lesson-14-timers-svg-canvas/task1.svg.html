@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clock.SVG</title>
+</head>
+<body>
+<svg id=SSS width="500" height="500"></svg>
+<script>
+  'use strict';
+  var baseRadius = 260; // радиус циферблата
+  var coordCentrBaseCircleX = 150; // координаты центра циферблата по Х
+  var coordCentrBaseCircleY = 150; // координаты центра циферблата по У
+  var dotSize = 14;
+  setInterval(tickTimer, 1000);
+
+  createWatch();
+
+  function createWatch() {
+    var SVGElem = document.getElementById('SSS');
+    SVGElem.appendChild(createSVGClock('black', 8, 'white'));
+    SVGElem.appendChild(createSVGArrow('seconds', 2, 125, 3, 3, 'red', 'red'));
+    SVGElem.appendChild(createSVGArrow('minutes', 4, 100, 3, 3, 'grey', 'grey'));
+    SVGElem.appendChild(createSVGArrow('hours', 6, 70, 3, 3, 'black', 'black'));
+    SVGElem.appendChild(createSVGDecorativeDot(dotSize));
+
+    return SVGElem;
+  }
+
+  function createSVGClock(stroke, strokeWidth, fill) {
+    var baseCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    baseCircle.setAttribute('stroke', stroke);
+    baseCircle.setAttribute('stroke-width', strokeWidth);
+    baseCircle.setAttribute('fill', fill);
+    baseCircle.setAttribute('r', baseRadius / 2);
+    baseCircle.setAttribute('cx', coordCentrBaseCircleX);
+    baseCircle.setAttribute('cy', coordCentrBaseCircleY);
+    return baseCircle;
+  }
+
+  function createSVGArrow(arrowType, arrowWidth, arrowHight, radiusRX, radiusRY, stroke, fill) {
+    var arrow = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    arrow.setAttribute('id', arrowType + ' arrow');
+    arrow.setAttribute('x', coordCentrBaseCircleX - arrowWidth /2);
+    arrow.setAttribute('y', coordCentrBaseCircleY);
+    arrow.setAttribute('width', arrowWidth);
+    arrow.setAttribute('height', arrowHight);
+    arrow.setAttribute('rx', radiusRX);
+    arrow.setAttribute('ry', radiusRY);
+    arrow.setAttribute('stroke', stroke);
+    arrow.setAttribute('fill', fill);
+    // arrow.style.rotate = 0% ${arrowWidth / 2}px;
+    // arrow.setAttribute('rotate', 360, coordCentrBaseCircleX, coordCentrBaseCircleY);
+    return arrow;
+  }
+
+  function createSVGDecorativeDot(size){
+    var dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    dot.setAttribute('id', 'dot');
+    dot.setAttribute('cx',  coordCentrBaseCircleX = 150);
+    dot.setAttribute('cy',  coordCentrBaseCircleY = 150);
+    dot.setAttribute('r', size / 2);
+    return dot;
+  }
+
+  // Logic
+
+  function tickTimer() {
+    var now = new Date();
+    var thisSecond = now.getSeconds();
+    var thisMinute = now.getMinutes();
+    var thisHour = now.getHours();
+    updateWatch(thisHour, thisMinute, thisSecond);
+    updateDigitalWatch(thisHour, thisMinute, thisSecond);
+  }
+
+  function updateWatch(hour, minute, second) {
+    var thisSecondRotate = (second / 60) * 360 - 90;
+    var thisMinuteRotate = (minute) / 60 * 360 - 90;
+    var thisHourRotate = (hour + minute / 60) / 12 * 360 - 90;
+    rotateHandle('seconds', thisSecondRotate);
+    rotateHandle('minutes', thisMinuteRotate);
+    rotateHandle('hours', thisHourRotate);
+  }
+
+  function rotateHandle(handle, degree) {
+    var arrow = document.querySelector(`.${handle}`);
+    arrow.style.transform = `rotate(${degree}deg)`;
+  }
+
+  function updateDigitalWatch(hour, minute, second) {
+    var digitalWatchSeconds = document.querySelector('#secondstext');
+    var digitalWatchMinutes = document.querySelector('#minutestext');
+    var digitalWatchHours = document.querySelector('#hourstext');
+    digitalWatchSeconds.textContent = addZeroToNumber(second);
+    digitalWatchMinutes.textContent = addZeroToNumber(minute);
+    digitalWatchHours.textContent = addZeroToNumber(hour);
+  }
+
+  function addZeroToNumber(currentTime) {
+    return (`${currentTime}`.length < 2) ? (`0${currentTime}`) : currentTime;
+  }
+</script>
+</body>
+</html>
