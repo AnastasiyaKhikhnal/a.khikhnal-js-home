@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  width: 700px;
+  height: 500px;
+}
+
+#gameScore {
+  text-align: center;
+  line-height: 70px;
+  font-size: 48px;
+}
+
+#field {
+  background: lightgoldenrodyellow;
+  border: 1px solid black
+}
+
+#racket1 {
+  background: #09AA57;
+}
+#racket2 {
+  background: #191497;
+}
+
+#ball {
+  background: #F02137;
+  border-radius: 50%;
+}
