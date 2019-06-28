@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAXStorage</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="AJAXStorage.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <button class="btn-add">Ввод информации о напитке</button>
+  <button class="btn-get">Получение информации о напитке</button>
+  <button class="btn-delete">Удаление информации о напитке</button>
+  <button class="btn-list">Перечень всех напитков</button>
+</div>
+<label>
+  <textarea class="info"></textarea>
+</label>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src='AJAXStorage.js'></script>
+<script>
+  'use strict';
+  var DrinkStorage = new TAJAXStorage();
+
+  document.querySelector('.btn-add').addEventListener('click', function () {
+    var name = prompt('Введите название напитка', 'Кола');
+    var typeOfDrink = prompt('Этот напиток алкогольный?', 'Нет');
+    var recipe = prompt('Введите рецепт напитка', ' ');
+
+    DrinkStorage.addValue(name, {
+      name: 'название напитка: ' + name + '\n',
+      typeOfDrink: 'алкогольный: ' + typeOfDrink + '\n',
+      recipe: 'рецепт: ' + recipe
+    });
+  });
+
+  document.querySelector('.btn-get').addEventListener('click', function () {
+    var name = prompt('Введите название напитка', 'Кола');
+    var q = DrinkStorage.getValue(name);
+    document.querySelector('.info').innerHTML = Object.values(q).join('');
+  });
+
+  document.querySelector('.btn-delete').addEventListener('click', function () {
+    var name = prompt('Введите название напитка', 'Кола');
+    var res = DrinkStorage.deleteValue(name);
+    document.querySelector('.info').innerHTML = 'Информация удалена';
+  });
+
+  document.querySelector('.btn-list').addEventListener('click', function () {
+    document.querySelector('.info').innerHTML = DrinkStorage.getKeys().toString();
+  });
+</script>
+</body>
+</html>
