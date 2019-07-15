@@ -1,0 +1,18 @@
+.wrap {
+  display: inline-flex;
+}
+
+button, .info {
+  display: block;
+  margin: 20px;
+}
+
+.info {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+}
+
+button {
+  padding: 10px 10px;
+}
